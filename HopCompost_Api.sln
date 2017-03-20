@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HopCompost_Api", "HopCompost_Api\HopCompost_Api.csproj", "{E3BD34C9-2183-47B0-B303-55232E484FF7}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HopCompost_Db", "HopCompost_Db\HopCompost_Db.sqlproj", "{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HopCompost_DataAccess", "HopCompost_DataAccess\HopCompost_DataAccess.csproj", "{A866C7C7-4B9A-43F1-8A70-9C7E9CF9AAA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HopCompost_Service", "HopCompost_Service\HopCompost_Service.csproj", "{6C38CC83-E5FD-487E-9141-1F2E54F55C00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HopCompost_Common", "HopCompost_Common\HopCompost_Common.csproj", "{C92F703A-C1BF-43AC-97F0-2997B5216BBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3BD34C9-2183-47B0-B303-55232E484FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3BD34C9-2183-47B0-B303-55232E484FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3BD34C9-2183-47B0-B303-55232E484FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3BD34C9-2183-47B0-B303-55232E484FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C1FFCFF-A5E4-41F8-BF00-B6DB89BA01A4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A866C7C7-4B9A-43F1-8A70-9C7E9CF9AAA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A866C7C7-4B9A-43F1-8A70-9C7E9CF9AAA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A866C7C7-4B9A-43F1-8A70-9C7E9CF9AAA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A866C7C7-4B9A-43F1-8A70-9C7E9CF9AAA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C38CC83-E5FD-487E-9141-1F2E54F55C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C38CC83-E5FD-487E-9141-1F2E54F55C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C38CC83-E5FD-487E-9141-1F2E54F55C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C38CC83-E5FD-487E-9141-1F2E54F55C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C92F703A-C1BF-43AC-97F0-2997B5216BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92F703A-C1BF-43AC-97F0-2997B5216BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92F703A-C1BF-43AC-97F0-2997B5216BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92F703A-C1BF-43AC-97F0-2997B5216BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
