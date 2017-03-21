@@ -42,8 +42,15 @@
   <ItemGroup>
     <Compile Include="Base\MapperBase.cs" />
     <Compile Include="Base\ServiceBase.cs" />
+    <Compile Include="Mappers\BinCollectionMapper.cs" />
+    <Compile Include="Mappers\BinCollectionReverseMapper.cs" />
+    <Compile Include="ViewModels\BinCollectionViewModel.cs" />
+    <Compile Include="Services\BinService.cs" />
+    <Compile Include="Interfaces\IBinService.cs" />
     <Compile Include="Interfaces\IContractService.cs" />
+    <Compile Include="Mappers\ClientReverseMapper.cs" />
     <Compile Include="Mappers\ContractMapper.cs" />
+    <Compile Include="Mappers\ContractReverseMapper.cs" />
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="Interfaces\IMapper.cs" />
     <Compile Include="Mappers\ClientMapper.cs" />

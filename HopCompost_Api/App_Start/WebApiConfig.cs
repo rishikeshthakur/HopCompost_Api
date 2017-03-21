@@ -9,12 +9,12 @@ namespace HopCompost_Api
     {
         public static void Register(HttpConfiguration config)
         {
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
             // Web API configuration and services
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
-
-            // Web API routes
-            config.MapHttpAttributeRoutes();
 
             // Web API configuration and services
             config.EnableCors(new EnableCorsAttribute(origins: "*", headers: "*", methods: "*"));
