@@ -24,7 +24,7 @@ namespace HopCompost_DataAccess
         public int ClientId { get; set; }
         public int EmployeeId { get; set; }
         public Nullable<int> GreenBinCount { get; set; }
-        public Nullable<int> YellowBinCount { get; set; }
+        public Nullable<int> GreyBinCount { get; set; }
         public Nullable<int> BlueBinCount { get; set; }
         public Nullable<System.TimeSpan> CollectionTime { get; set; }
         public System.DateTime CollectionDate { get; set; }

@@ -4,5 +4,5 @@
     [Name] NVARCHAR(100) NOT NULL, 
     [Address] NVARCHAR(MAX) NULL, 
     [EmergencyContact] NVARCHAR(50) NULL,
-	Constraint PK_Client Primary Key Clustered (id)
+	Constraint PK_Client Primary Key Clustered (Id)
 )

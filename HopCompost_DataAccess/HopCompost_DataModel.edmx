@@ -13,7 +13,7 @@
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="EmployeeId" Type="int" Nullable="false" />
           <Property Name="GreenBinCount" Type="int" />
-          <Property Name="YellowBinCount" Type="int" />
+          <Property Name="GreyBinCount" Type="int" />
           <Property Name="BlueBinCount" Type="int" />
           <Property Name="CollectionTime" Type="time" Precision="7" />
           <Property Name="CollectionDate" Type="date" Nullable="false" />
@@ -182,9 +182,9 @@
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmergencyContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contracts" Relationship="Self.FK_Contract_Client" FromRole="Client" ToRole="Contract" />
-          <NavigationProperty Name="BinCollections" Relationship="HopCompost_DbModel.FK_BinCollection_Client" FromRole="Client" ToRole="BinCollection" />
           <NavigationProperty Name="BinProcessings" Relationship="HopCompost_DbModel.FK_BinProcessing_Client" FromRole="Client" ToRole="BinProcessing" />
           <NavigationProperty Name="BinWeights" Relationship="HopCompost_DbModel.FK_BinWeight_Client" FromRole="Client" ToRole="BinWeight" />
+          <NavigationProperty Name="BinCollections" Relationship="HopCompost_DbModel.FK_BinCollection_Client" FromRole="Client" ToRole="BinCollection" />
         </EntityType>
         <EntityType Name="Contract">
           <Key>
@@ -216,10 +216,18 @@
             <End Role="Client" EntitySet="Clients" />
             <End Role="Contract" EntitySet="Contracts" />
           </AssociationSet>
-          <EntitySet Name="BinCollections" EntityType="HopCompost_DbModel.BinCollection" />
           <EntitySet Name="BinProcessings" EntityType="HopCompost_DbModel.BinProcessing" />
           <EntitySet Name="BinWeights" EntityType="HopCompost_DbModel.BinWeight" />
           <EntitySet Name="Employees" EntityType="HopCompost_DbModel.Employee" />
+          <AssociationSet Name="FK_BinProcessing_Client" Association="HopCompost_DbModel.FK_BinProcessing_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="BinProcessing" EntitySet="BinProcessings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BinWeight_Client" Association="HopCompost_DbModel.FK_BinWeight_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="BinWeight" EntitySet="BinWeights" />
+          </AssociationSet>
+          <EntitySet Name="BinCollections" EntityType="HopCompost_DbModel.BinCollection" />
           <AssociationSet Name="FK_BinCollection_Client" Association="HopCompost_DbModel.FK_BinCollection_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="BinCollection" EntitySet="BinCollections" />
@@ -232,32 +240,7 @@
             <End Role="BinCollection" EntitySet="BinCollections" />
             <End Role="BinWeight" EntitySet="BinWeights" />
           </AssociationSet>
-          <AssociationSet Name="FK_BinProcessing_Client" Association="HopCompost_DbModel.FK_BinProcessing_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="BinProcessing" EntitySet="BinProcessings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BinWeight_Client" Association="HopCompost_DbModel.FK_BinWeight_Client">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="BinWeight" EntitySet="BinWeights" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="BinCollection">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="GreenBinCount" Type="Int32" />
-          <Property Name="YellowBinCount" Type="Int32" />
-          <Property Name="BlueBinCount" Type="Int32" />
-          <Property Name="CollectionTime" Type="Time" Precision="7" />
-          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="HopCompost_DbModel.FK_BinCollection_Client" FromRole="BinCollection" ToRole="Client" />
-          <NavigationProperty Name="Employee" Relationship="HopCompost_DbModel.FK_BinCollection_Employee" FromRole="BinCollection" ToRole="Employee" />
-          <NavigationProperty Name="BinWeights" Relationship="HopCompost_DbModel.FK_BinWeight_BinCollection" FromRole="BinCollection" ToRole="BinWeight" />
-        </EntityType>
         <EntityType Name="BinProcessing">
           <Key>
             <PropertyRef Name="Id" />
@@ -278,8 +261,8 @@
           <Property Name="ClientId" Type="Int32" Nullable="false" />
           <Property Name="BinCollectionId" Type="Int32" Nullable="false" />
           <Property Name="BinWeight1" Type="Int32" />
-          <NavigationProperty Name="BinCollection" Relationship="HopCompost_DbModel.FK_BinWeight_BinCollection" FromRole="BinWeight" ToRole="BinCollection" />
           <NavigationProperty Name="Client" Relationship="HopCompost_DbModel.FK_BinWeight_Client" FromRole="BinWeight" ToRole="Client" />
+          <NavigationProperty Name="BinCollection" Relationship="HopCompost_DbModel.FK_BinWeight_BinCollection" FromRole="BinWeight" ToRole="BinCollection" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -288,6 +271,47 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BinCollections" Relationship="HopCompost_DbModel.FK_BinCollection_Employee" FromRole="Employee" ToRole="BinCollection" />
+        </EntityType>
+        <Association Name="FK_BinProcessing_Client">
+          <End Type="HopCompost_DbModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="HopCompost_DbModel.BinProcessing" Role="BinProcessing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BinProcessing">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BinWeight_Client">
+          <End Type="HopCompost_DbModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="HopCompost_DbModel.BinWeight" Role="BinWeight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BinWeight">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BinCollection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="GreenBinCount" Type="Int32" />
+          <Property Name="GreyBinCount" Type="Int32" />
+          <Property Name="BlueBinCount" Type="Int32" />
+          <Property Name="CollectionTime" Type="Time" Precision="7" />
+          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="HopCompost_DbModel.FK_BinCollection_Client" FromRole="BinCollection" ToRole="Client" />
+          <NavigationProperty Name="Employee" Relationship="HopCompost_DbModel.FK_BinCollection_Employee" FromRole="BinCollection" ToRole="Employee" />
+          <NavigationProperty Name="BinWeights" Relationship="HopCompost_DbModel.FK_BinWeight_BinCollection" FromRole="BinCollection" ToRole="BinWeight" />
         </EntityType>
         <Association Name="FK_BinCollection_Client">
           <End Type="HopCompost_DbModel.Client" Role="Client" Multiplicity="1" />
@@ -325,30 +349,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BinProcessing_Client">
-          <End Type="HopCompost_DbModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="HopCompost_DbModel.BinProcessing" Role="BinProcessing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BinProcessing">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BinWeight_Client">
-          <End Type="HopCompost_DbModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="HopCompost_DbModel.BinWeight" Role="BinWeight" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BinWeight">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -373,21 +373,6 @@
                 <ScalarProperty Name="GreenBinCount" ColumnName="GreenBinCount" />
                 <ScalarProperty Name="GreyBinCount" ColumnName="GreyBinCount" />
                 <ScalarProperty Name="BlueBinCount" ColumnName="BlueBinCount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BinCollections">
-            <EntityTypeMapping TypeName="HopCompost_DbModel.BinCollection">
-              <MappingFragment StoreEntitySet="BinCollection">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
-                <ScalarProperty Name="CollectionTime" ColumnName="CollectionTime" />
-                <ScalarProperty Name="BlueBinCount" ColumnName="BlueBinCount" />
-                <ScalarProperty Name="YellowBinCount" ColumnName="YellowBinCount" />
-                <ScalarProperty Name="GreenBinCount" ColumnName="GreenBinCount" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -417,6 +402,21 @@
             <EntityTypeMapping TypeName="HopCompost_DbModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BinCollections">
+            <EntityTypeMapping TypeName="HopCompost_DbModel.BinCollection">
+              <MappingFragment StoreEntitySet="BinCollection">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="CollectionTime" ColumnName="CollectionTime" />
+                <ScalarProperty Name="BlueBinCount" ColumnName="BlueBinCount" />
+                <ScalarProperty Name="GreyBinCount" ColumnName="GreyBinCount" />
+                <ScalarProperty Name="GreenBinCount" ColumnName="GreenBinCount" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

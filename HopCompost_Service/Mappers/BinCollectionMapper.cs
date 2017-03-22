@@ -1,4 +1,6 @@
-﻿using HopCompost_DataAccess;
+﻿using System;
+using HopCompost_Common.Enums;
+using HopCompost_DataAccess;
 using HopCompost_Service.Base;
 using HopCompost_Service.Interfaces;
 using HopCompost_Service.ViewModels;
@@ -11,7 +13,17 @@ namespace HopCompost_Service.Mappers
         {
             return new BinCollectionViewModel
             {
-                //to do map all the fields from source to bin collection view model
+                Id = source.Id,
+                ClientId = source.ClientId,
+                EmployeeId = source.EmployeeId,
+                GreenBinCount = source.GreenBinCount,
+                GreyBinCount = source.GreyBinCount,
+                BlueBinCount = source.BlueBinCount,
+                CollectionTime = source.CollectionTime,
+                CollectionDate = source.CollectionDate,
+                ClientName = source.Client.Name,
+                EmployeeName = source.Employee.Name,
+                Status = (CollectionStatusEnum) Enum.Parse(typeof(CollectionStatusEnum), source.Status, true)
             };
         }
     }

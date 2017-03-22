@@ -27,9 +27,9 @@ namespace HopCompost_DataAccess
     
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
-        public virtual DbSet<BinCollection> BinCollections { get; set; }
         public virtual DbSet<BinProcessing> BinProcessings { get; set; }
         public virtual DbSet<BinWeight> BinWeights { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<BinCollection> BinCollections { get; set; }
     }
 }
