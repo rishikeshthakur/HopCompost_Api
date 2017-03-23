@@ -5,7 +5,7 @@
     [GreenBinCount]  INT           NULL,
     [GreyBinCount]   INT           NULL,
     [BlueBinCount]   INT           NULL,
-    [CollectionTime] TIME (7)      NULL,
+    [CollectionDurationInMinutes] INT NOT NULL,
     [CollectionDate] DATE          NOT NULL,
     [Status]         NVARCHAR (50) DEFAULT ('Unprocessed') NULL,
     CONSTRAINT [PK_BinCollection] PRIMARY KEY CLUSTERED ([Id] ASC),

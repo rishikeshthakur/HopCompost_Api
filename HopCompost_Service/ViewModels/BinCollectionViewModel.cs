@@ -12,7 +12,7 @@ namespace HopCompost_Service.ViewModels
         public int? GreenBinCount { get; set; }
         public int? GreyBinCount { get; set; }
         public int? BlueBinCount { get; set; }
-        public Nullable<System.TimeSpan> CollectionTime { get; set; }
+        public int CollectionDurationInMinutes { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CollectionDate { get; set; }

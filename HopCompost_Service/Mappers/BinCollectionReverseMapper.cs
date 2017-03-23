@@ -1,4 +1,5 @@
-﻿using HopCompost_DataAccess;
+﻿using System;
+using HopCompost_DataAccess;
 using HopCompost_DataAccess.Base;
 using HopCompost_Service.Base;
 using HopCompost_Service.Interfaces;
@@ -24,13 +25,12 @@ namespace HopCompost_Service.Mappers
             var binCollection = source.Id == 0 ? _binCollectionRepository.NewObject() : _binCollectionRepository.Single(p => p.Id == source.Id);
             var employee = _employeeRepository.Single(p => p.Id == source.EmployeeId);
             var client = _clientRepository.Single(p => p.Id == source.ClientId);
-
+            
             binCollection.Id = source.Id;
             binCollection.GreenBinCount = source.GreenBinCount;
             binCollection.BlueBinCount = source.BlueBinCount;
             binCollection.GreyBinCount = source.GreyBinCount;
             binCollection.CollectionDate = source.CollectionDate;
-            binCollection.CollectionTime = source.CollectionTime;
 
             binCollection.Employee = employee;
             binCollection.Client = client;
