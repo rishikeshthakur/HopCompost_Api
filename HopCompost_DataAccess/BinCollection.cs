@@ -26,13 +26,13 @@ namespace HopCompost_DataAccess
         public Nullable<int> GreenBinCount { get; set; }
         public Nullable<int> GreyBinCount { get; set; }
         public Nullable<int> BlueBinCount { get; set; }
-        public Nullable<System.TimeSpan> CollectionTime { get; set; }
+        public int CollectionDurationInMinutes { get; set; }
         public System.DateTime CollectionDate { get; set; }
         public string Status { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BinWeight> BinWeights { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

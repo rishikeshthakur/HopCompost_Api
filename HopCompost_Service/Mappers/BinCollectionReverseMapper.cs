@@ -1,4 +1,5 @@
 ﻿using System;
+using HopCompost_Common.Enums;
 using HopCompost_DataAccess;
 using HopCompost_DataAccess.Base;
 using HopCompost_Service.Base;
@@ -30,6 +31,7 @@ namespace HopCompost_Service.Mappers
             binCollection.GreenBinCount = source.GreenBinCount;
             binCollection.BlueBinCount = source.BlueBinCount;
             binCollection.GreyBinCount = source.GreyBinCount;
+            binCollection.CollectionDurationInMinutes = source.CollectionDurationInMinutes;
             binCollection.CollectionDate = source.CollectionDate;
 
             binCollection.Employee = employee;

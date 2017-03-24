@@ -19,7 +19,7 @@ namespace HopCompost_Service.Mappers
                 GreenBinCount = source.GreenBinCount,
                 GreyBinCount = source.GreyBinCount,
                 BlueBinCount = source.BlueBinCount,
-                CollectionTime = source.CollectionTime,
+                CollectionDurationInMinutes = source.CollectionDurationInMinutes,
                 CollectionDate = source.CollectionDate,
                 ClientName = source.Client.Name,
                 EmployeeName = source.Employee.Name,

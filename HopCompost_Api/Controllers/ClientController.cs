@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
 using HopCompost_Service.Interfaces;
 using HopCompost_Service.ViewModels;
 
@@ -22,6 +24,14 @@ namespace HopCompost_Api.Controllers
         public IHttpActionResult Get(int id)
         {
             return Json(_clientService.GetClient(id));
+        }
+
+        [System.Web.Http.Route("api/Client/GetLookup")]
+        public IHttpActionResult GetLookup()
+        {
+            var clients = _clientService.GetClients();
+            
+            return Json(clients.Select(p => new SelectListItem {  Text = p.Name, Value = p.Id.ToString()}));
         }
 
         public IHttpActionResult Post([FromBody]ClientViewModel clientViewModel)

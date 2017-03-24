@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.Serialization.Formatters;
 using HopCompost_Common.Enums;
 using HopCompost_Common.Misc;
 using HopCompost_DataAccess;
@@ -27,6 +29,12 @@ namespace HopCompost_Service.Services
         public IEnumerable<BinCollectionViewModel> GetBinCollectionByDate(DateTime dateTime)
         {
             return _binCollectionRepository.Find(p => p.CollectionDate == dateTime).Select(p => _binCollectionMapper.Map(p));
+        }
+
+        public IEnumerable<BinCollectionViewModel> GetBinCollectionByEmployee(int employeeId)
+        {
+            return
+                _binCollectionRepository.Find(p => p.EmployeeId == employeeId).Select(p => _binCollectionMapper.Map(p));
         }
 
         public IEnumerable<BinCollectionViewModel> GetBinCollectionByStatus(CollectionStatusEnum collectionStatusEnum)
@@ -64,6 +72,23 @@ namespace HopCompost_Service.Services
             {
                 return ResultAndMessage.Failed(exception.Message);
             }
+        }
+
+        public IEnumerable<BinCollectionViewModel> GetFilteredCollection(int? employeeId, int? clientId, DateTime? selectedDate)
+        {
+            var result = selectedDate.HasValue
+                ? GetBinCollectionByDate(selectedDate.Value)
+                : _binCollectionRepository.GetAll().Select(p => _binCollectionMapper.Map(p));
+
+            result = employeeId.HasValue ? result.Where(p => p.EmployeeId == employeeId.Value) : result;
+            result = clientId.HasValue ? result.Where(p => p.ClientId == clientId.Value) : result;
+
+            return result;
+        }
+
+        public BinCollectionViewModel GetBinCollectionById(int id)
+        {
+            return _binCollectionMapper.Map(_binCollectionRepository.Single(p => p.Id == id));
         }
     }
 }

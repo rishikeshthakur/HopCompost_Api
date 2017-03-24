@@ -19,7 +19,7 @@ namespace HopCompost_DataAccess
         public int BinCollectionId { get; set; }
         public Nullable<int> BinWeight1 { get; set; }
     
-        public virtual Client Client { get; set; }
         public virtual BinCollection BinCollection { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

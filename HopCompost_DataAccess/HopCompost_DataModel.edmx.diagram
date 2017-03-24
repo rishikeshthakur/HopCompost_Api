@@ -5,18 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f1a1a54cd6a14bd498188878906a2700" Name="Diagram1">
-        <EntityTypeShape EntityType="HopCompost_DbModel.Client" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="HopCompost_DbModel.Contract" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="HopCompost_DbModel.FK_Contract_Client" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="HopCompost_DbModel.BinProcessing" Width="1.5" PointX="3" PointY="5.25" />
-        <EntityTypeShape EntityType="HopCompost_DbModel.BinWeight" Width="1.5" PointX="8.25" PointY="1.375" />
-        <EntityTypeShape EntityType="HopCompost_DbModel.Employee" Width="1.5" PointX="3.75" PointY="8.625" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinCollection1" Width="1.5" PointX="9" PointY="8.375" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinProcessing1" Width="1.5" PointX="9" PointY="15.5" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinWeight1" Width="1.5" PointX="11.25" PointY="9.375" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Client1" Width="1.5" PointX="6.75" PointY="9.875" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Contract1" Width="1.5" PointX="9" PointY="12.5" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Employee1" Width="1.5" PointX="6.75" PointY="7.25" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.875" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Client1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Employee1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_BinCollection1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinProcessing_Client1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_Client1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_Contract_Client1" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinCollection" Width="1.5" PointX="5.375" PointY="1" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinWeight" Width="1.5" PointX="7.625" PointY="1.5" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_BinCollection" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Employee" Width="1.5" PointX="3.125" PointY="8.75" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Employee" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinProcessing" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Client" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Contract" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Client" />
         <AssociationConnector Association="HopCompost_DbModel.FK_BinProcessing_Client" />
         <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_Client" />
-        <EntityTypeShape EntityType="HopCompost_DbModel.BinCollection" Width="1.5" PointX="5.75" PointY="1.125" />
-        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Client" />
-        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Employee" />
-        <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_BinCollection" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_Contract_Client" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

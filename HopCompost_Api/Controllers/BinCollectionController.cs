@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Http;
 using HopCompost_Common.Enums;
 using HopCompost_Service.Interfaces;
@@ -13,6 +14,19 @@ namespace HopCompost_Api.Controllers
         public BinCollectionController(IBinService binService)
         {
             _binService = binService;
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            return Json(_binService.GetBinCollectionById(id));
+        }
+
+        [Route("api/BinCollection/GetFilteredCollection")]
+        public IHttpActionResult GetFilteredCollection(int? employeeId, int? clientId, DateTime? selectedDate)
+        {
+            var result = _binService.GetFilteredCollection(employeeId, clientId, selectedDate);
+
+            return Json(result);
         }
 
         [Route("api/BinCollection/GetByDate")]
