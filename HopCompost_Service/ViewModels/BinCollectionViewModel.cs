@@ -15,8 +15,8 @@ namespace HopCompost_Service.ViewModels
         public int CollectionDurationInMinutes { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime CollectionDate { get; set; }
-        public CollectionStatusEnum Status { get; set; }
+        public DateTime? CollectionDate { get; set; }
+        public string Status { get; set; }
         public string ClientName { get; set; }
         public string EmployeeName { get; set; }
     }

@@ -54,65 +54,54 @@
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="BinCollection.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="BinProcessing.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="BinWeight.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Client.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Contract.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HopCompost_DataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HopCompost_DataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HopCompost_DataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HopCompost_DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HopCompost_DataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HopCompost_DataModel.edmx</DependentUpon>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="HopCompost_DbEntities.cs" />
+    <Compile Include="HopCompost_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HopCompost_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HopCompost_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HopCompost_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HopCompost_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HopCompost_Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="HopCompost_DataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HopCompost_DataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="HopCompost_DataModel.edmx.diagram">
-      <DependentUpon>HopCompost_DataModel.edmx</DependentUpon>
+    <EntityDeploy Include="HopCompost_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HopCompost_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="HopCompost_Model.edmx.diagram">
+      <DependentUpon>HopCompost_Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HopCompost_DataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HopCompost_DataModel.Context.cs</LastGenOutput>
-      <DependentUpon>HopCompost_DataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="HopCompost_DataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HopCompost_DataModel.edmx</DependentUpon>
-      <LastGenOutput>HopCompost_DataModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -122,6 +111,18 @@
       <Project>{C92F703A-C1BF-43AC-97F0-2997B5216BBC}</Project>
       <Name>HopCompost_Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="HopCompost_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HopCompost_Model.edmx</DependentUpon>
+      <LastGenOutput>HopCompost_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="HopCompost_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HopCompost_Model.edmx</DependentUpon>
+      <LastGenOutput>HopCompost_Model.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

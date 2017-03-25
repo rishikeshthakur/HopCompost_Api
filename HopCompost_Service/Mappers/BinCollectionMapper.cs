@@ -23,7 +23,7 @@ namespace HopCompost_Service.Mappers
                 CollectionDate = source.CollectionDate,
                 ClientName = source.Client.Name,
                 EmployeeName = source.Employee.Name,
-                Status = (CollectionStatusEnum) Enum.Parse(typeof(CollectionStatusEnum), source.Status, true)
+                Status = source.Status
             };
         }
     }

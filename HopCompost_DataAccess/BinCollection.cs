@@ -30,9 +30,9 @@ namespace HopCompost_DataAccess
         public System.DateTime CollectionDate { get; set; }
         public string Status { get; set; }
     
+        public virtual Client Client { get; set; }
+        public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BinWeight> BinWeights { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Client Client { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace HopCompost_DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HopCompost_DbEntities : DbContext
+    public partial class HopCompost_DbEntities1 : DbContext
     {
-        public HopCompost_DbEntities()
-            : base("name=HopCompost_DbEntities")
+        public HopCompost_DbEntities1()
+            : base("name=HopCompost_DbEntities1")
         {
         }
     
@@ -25,11 +25,12 @@ namespace HopCompost_DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<BinCollection> BinCollections { get; set; }
-        public virtual DbSet<BinWeight> BinWeights { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<BinProcessing> BinProcessings { get; set; }
+        public virtual DbSet<BinWeight> BinWeights { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Contract> Contracts { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }

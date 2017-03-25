@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Serialization.Formatters;
 using HopCompost_Common.Enums;
 using HopCompost_Common.Misc;
 using HopCompost_DataAccess;
@@ -16,14 +14,16 @@ namespace HopCompost_Service.Services
     public class BinService : ServiceBase, IBinService
     {
         private readonly IRepository<BinCollection> _binCollectionRepository;
+        private readonly IRepository<BinWeight> _binWeightRepository;
         private readonly IMapper<BinCollection, BinCollectionViewModel> _binCollectionMapper;
         private readonly IMapper<BinCollectionViewModel, BinCollection> _binCollectionReverseMapper;
 
-        public BinService(IRepository<BinCollection> binCollectionRepository, IMapper<BinCollection, BinCollectionViewModel> binCollectionMapper, IMapper<BinCollectionViewModel, BinCollection> binCollectionReverseMapper)
+        public BinService(IRepository<BinCollection> binCollectionRepository, IMapper<BinCollection, BinCollectionViewModel> binCollectionMapper, IMapper<BinCollectionViewModel, BinCollection> binCollectionReverseMapper, IRepository<BinWeight> binWeightRepository)
         {
             _binCollectionRepository = binCollectionRepository;
             _binCollectionMapper = binCollectionMapper;
             _binCollectionReverseMapper = binCollectionReverseMapper;
+            _binWeightRepository = binWeightRepository;
         }
 
         public IEnumerable<BinCollectionViewModel> GetBinCollectionByDate(DateTime dateTime)
@@ -74,7 +74,7 @@ namespace HopCompost_Service.Services
             }
         }
 
-        public IEnumerable<BinCollectionViewModel> GetFilteredCollection(int? employeeId, int? clientId, DateTime? selectedDate)
+        public IEnumerable<BinCollectionViewModel> GetPastCollection(int? employeeId, int? clientId, DateTime? selectedDate)
         {
             var result = selectedDate.HasValue
                 ? GetBinCollectionByDate(selectedDate.Value)
@@ -89,6 +89,53 @@ namespace HopCompost_Service.Services
         public BinCollectionViewModel GetBinCollectionById(int id)
         {
             return _binCollectionMapper.Map(_binCollectionRepository.Single(p => p.Id == id));
+        }
+
+        public BinWeightCollectionViewModel GetBinWeightCollection(int id)
+        {
+            var binCollection = _binCollectionRepository.Single(p => p.Id == id);
+            var binWeightViewModels = new List<BinWeightViewModel>();
+
+            for (var i = 1; i <= binCollection.GreenBinCount.GetValueOrDefault(); i++)
+                binWeightViewModels.Add(new BinWeightViewModel
+                {
+                    BinNumber = i
+                });
+
+            var binWeightCollectionViewModel = new BinWeightCollectionViewModel
+            {
+                BinCollectionId = binCollection.Id,
+                ClientId = binCollection.ClientId,
+                ClientName = binCollection.Client.Name,
+                Processed = binCollection.Status == CollectionStatusEnum.Processed.ToString(),
+                BinWeights = binWeightViewModels
+            };
+
+            return binWeightCollectionViewModel;
+        }
+
+        public ResultAndMessage TryAddBinWeightCollection(BinWeightCollectionViewModel binWeightCollectionViewModel)
+        {
+            var binCollection =
+                _binCollectionRepository.Single(p => p.Id == binWeightCollectionViewModel.BinCollectionId);
+
+            if (binCollection.BinWeights.Count == binCollection.GreenBinCount.GetValueOrDefault())
+                binCollection.BinWeights.Clear();
+
+            foreach (var binWeightViewModel in binWeightCollectionViewModel.BinWeights)
+            {
+                var binWeight = _binWeightRepository.NewObject();
+
+                binWeight.BinCollectionId = binCollection.Id;
+                binWeight.BinWeight1 = Convert.ToInt32(binWeightViewModel.Weight);
+
+                binCollection.BinWeights.Add(binWeight);
+            }
+
+            if (binWeightCollectionViewModel.Processed)
+                binCollection.Status = CollectionStatusEnum.Processed.ToString();
+
+            return _binCollectionRepository.TryToSaveChanges();
         }
     }
 }

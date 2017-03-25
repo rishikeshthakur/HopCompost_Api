@@ -12,12 +12,8 @@ namespace HopCompost_DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class BinWeight
+    public partial class C__RefactorLog
     {
-        public int Id { get; set; }
-        public int BinCollectionId { get; set; }
-        public Nullable<double> BinWeight1 { get; set; }
-    
-        public virtual BinCollection BinCollection { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }

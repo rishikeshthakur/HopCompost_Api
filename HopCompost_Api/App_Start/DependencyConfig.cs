@@ -19,7 +19,7 @@ namespace HopCompost_Api
         {
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToArray();
 
-            builder.RegisterType<HopCompost_DbEntities>().As<IDbContext>().InstancePerRequest();
+            builder.RegisterType<HopCompost_DbEntities1>().As<IDbContext>().InstancePerRequest();
 
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerRequest();
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly).AsClosedTypesOf(typeof(IRepository<>)).InstancePerRequest();

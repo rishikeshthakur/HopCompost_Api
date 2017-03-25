@@ -19,7 +19,6 @@ namespace HopCompost_DataAccess
         {
             this.BinCollections = new HashSet<BinCollection>();
             this.BinProcessings = new HashSet<BinProcessing>();
-            this.BinWeights = new HashSet<BinWeight>();
             this.Contracts = new HashSet<Contract>();
         }
     
@@ -32,8 +31,6 @@ namespace HopCompost_DataAccess
         public virtual ICollection<BinCollection> BinCollections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BinProcessing> BinProcessings { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BinWeight> BinWeights { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contract> Contracts { get; set; }
     }

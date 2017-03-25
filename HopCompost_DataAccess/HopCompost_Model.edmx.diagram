@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="206078ab70334d35be826b36baa8ccfb" Name="Diagram1">
+        <EntityTypeShape EntityType="HopCompost_DbModel.C__RefactorLog" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinCollection" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinProcessing" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.BinWeight" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Client" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Contract" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HopCompost_DbModel.Employee" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinCollection_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinWeight_BinCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_BinProcessing_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="HopCompost_DbModel.FK_Contract_Client" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

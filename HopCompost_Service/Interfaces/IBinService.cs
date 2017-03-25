@@ -16,7 +16,9 @@ namespace HopCompost_Service.Interfaces
         IEnumerable<BinCollectionViewModel> GetBinCollectionByStatus(CollectionStatusEnum collectionStatusEnum);
         ResultAndMessage TryAddBinCollection(BinCollectionViewModel binCollectionViewModel);
         ResultAndMessage TryModifyBinCollection(BinCollectionViewModel binCollectionViewModel);
-        IEnumerable<BinCollectionViewModel> GetFilteredCollection(int? employeeId, int? clientId, DateTime? selectedDate);
+        IEnumerable<BinCollectionViewModel> GetPastCollection(int? employeeId, int? clientId, DateTime? selectedDate);
         BinCollectionViewModel GetBinCollectionById(int id);
+        BinWeightCollectionViewModel GetBinWeightCollection(int id);
+        ResultAndMessage TryAddBinWeightCollection(BinWeightCollectionViewModel binWeightCollectionViewModel);
     }
 }

@@ -21,10 +21,10 @@ namespace HopCompost_Api.Controllers
             return Json(_binService.GetBinCollectionById(id));
         }
 
-        [Route("api/BinCollection/GetFilteredCollection")]
-        public IHttpActionResult GetFilteredCollection(int? employeeId, int? clientId, DateTime? selectedDate)
+        [Route("api/BinCollection/GetPastCollection")]
+        public IHttpActionResult GetPastCollection(int? employeeId, int? clientId, DateTime? selectedDate)
         {
-            var result = _binService.GetFilteredCollection(employeeId, clientId, selectedDate);
+            var result = _binService.GetPastCollection(employeeId, clientId, selectedDate);
 
             return Json(result);
         }
@@ -35,18 +35,31 @@ namespace HopCompost_Api.Controllers
             return Json(_binService.GetBinCollectionByDate(dateTime));
         }
 
-        [Route("api/BinCollection/GetByStatus")]
-        public IHttpActionResult GetByStatus(CollectionStatusEnum status)
+        [Route("api/BinCollection/GetBinCollectionByStatus")]
+        public IHttpActionResult GetBinCollectionByStatus(CollectionStatusEnum status)
         {
             return Json(_binService.GetBinCollectionByStatus(status));
         }
 
-        public IHttpActionResult Post([FromBody]BinCollectionViewModel binCollectionViewModel)
+        [Route("api/BinCollection/GetBinWeightCollection")]
+        public IHttpActionResult GetBinWeightCollection(int id)
         {
-            var resultAndMessage = _binService.TryAddBinCollection(binCollectionViewModel);
+            return Json(_binService.GetBinWeightCollection(id));
+        }
+
+        public IHttpActionResult Post([FromBody] BinWeightCollectionViewModel binWeightCollectionViewModel)
+        {
+            var resultAndMessage = _binService.TryAddBinWeightCollection(binWeightCollectionViewModel);
 
             return resultAndMessage.IsSuccessful ? (IHttpActionResult)Ok() : InternalServerError();
         }
+
+        //public IHttpActionResult Post([FromBody]BinCollectionViewModel binCollectionViewModel)
+        //{
+        //    var resultAndMessage = _binService.TryAddBinCollection(binCollectionViewModel);
+
+        //    return resultAndMessage.IsSuccessful ? (IHttpActionResult)Ok() : InternalServerError();
+        //}
 
         public IHttpActionResult Put(int id, [FromBody]BinCollectionViewModel binCollectionViewModel)
         {

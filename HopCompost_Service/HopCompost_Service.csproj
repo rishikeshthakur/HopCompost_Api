@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Base\MapperBase.cs" />
     <Compile Include="Base\ServiceBase.cs" />
+    <Compile Include="Mappers\BinWeightMapper.cs" />
+    <Compile Include="Mappers\BinWeightReverseMapper.cs" />
+    <Compile Include="ViewModels\BinWeightViewModel.cs" />
     <Compile Include="Mappers\EmployeeMapper.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />

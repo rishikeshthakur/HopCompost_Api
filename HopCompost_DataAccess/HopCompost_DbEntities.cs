@@ -10,7 +10,7 @@ namespace HopCompost_DataAccess
     }
 
     // ReSharper disable once InconsistentNaming
-    public partial class HopCompost_DbEntities : IDbContext
+    public partial class HopCompost_DbEntities1 : IDbContext
     {
 
         public new IDbSet<TEntity> Set<TEntity>() where TEntity : class

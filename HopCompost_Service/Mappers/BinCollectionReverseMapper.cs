@@ -32,7 +32,8 @@ namespace HopCompost_Service.Mappers
             binCollection.BlueBinCount = source.BlueBinCount;
             binCollection.GreyBinCount = source.GreyBinCount;
             binCollection.CollectionDurationInMinutes = source.CollectionDurationInMinutes;
-            binCollection.CollectionDate = source.CollectionDate;
+            binCollection.CollectionDate = binCollection.CollectionDate == default(DateTime) ? DateTime.Today : binCollection.CollectionDate;
+            binCollection.Status = string.IsNullOrWhiteSpace(source.Status) ? CollectionStatusEnum.Unprocessed.ToString() : source.Status;
 
             binCollection.Employee = employee;
             binCollection.Client = client;
