@@ -9,7 +9,6 @@ namespace HopCompost_DataAccess
         int SaveChanges();
     }
 
-    // ReSharper disable once InconsistentNaming
     public partial class HopCompost_DbEntities1 : IDbContext
     {
 

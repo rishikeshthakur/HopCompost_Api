@@ -13,7 +13,7 @@ namespace HopCompost_Service.Mappers
             return new BinWeightViewModel
             {
                 Id = source.Id,
-                Weight = Convert.ToDecimal(source.BinWeight1)
+                Weight = source.BinWeight1
             };
         }
     }

@@ -22,7 +22,7 @@ namespace HopCompost_Service.Mappers
                 ? _binWeightRepository.NewObject()
                 : _binWeightRepository.Single(p => p.Id == source.Id);
             
-            binWeight.BinWeight1 = Convert.ToInt32(source.Weight); //ToDo: Update this once the database is updated.
+            binWeight.BinWeight1 = source.Weight;
 
             return binWeight;
         }

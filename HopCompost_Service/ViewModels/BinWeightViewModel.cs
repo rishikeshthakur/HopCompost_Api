@@ -5,8 +5,7 @@ namespace HopCompost_Service.ViewModels
     public class BinWeightViewModel
     {
         public int Id { get; set; }
-        public int BinNumber { get; set; }
-        public decimal Weight { get; set; }
+        public double? Weight { get; set; }
     }
 
     public class BinWeightCollectionViewModel

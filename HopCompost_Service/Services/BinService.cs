@@ -17,13 +17,15 @@ namespace HopCompost_Service.Services
         private readonly IRepository<BinWeight> _binWeightRepository;
         private readonly IMapper<BinCollection, BinCollectionViewModel> _binCollectionMapper;
         private readonly IMapper<BinCollectionViewModel, BinCollection> _binCollectionReverseMapper;
+        private readonly IMapper<BinWeight, BinWeightViewModel> _binWeightMapper;
 
-        public BinService(IRepository<BinCollection> binCollectionRepository, IMapper<BinCollection, BinCollectionViewModel> binCollectionMapper, IMapper<BinCollectionViewModel, BinCollection> binCollectionReverseMapper, IRepository<BinWeight> binWeightRepository)
+        public BinService(IRepository<BinCollection> binCollectionRepository, IMapper<BinCollection, BinCollectionViewModel> binCollectionMapper, IMapper<BinCollectionViewModel, BinCollection> binCollectionReverseMapper, IRepository<BinWeight> binWeightRepository, IMapper<BinWeight, BinWeightViewModel> binWeightMapper)
         {
             _binCollectionRepository = binCollectionRepository;
             _binCollectionMapper = binCollectionMapper;
             _binCollectionReverseMapper = binCollectionReverseMapper;
             _binWeightRepository = binWeightRepository;
+            _binWeightMapper = binWeightMapper;
         }
 
         public IEnumerable<BinCollectionViewModel> GetBinCollectionByDate(DateTime dateTime)
@@ -96,12 +98,19 @@ namespace HopCompost_Service.Services
             var binCollection = _binCollectionRepository.Single(p => p.Id == id);
             var binWeightViewModels = new List<BinWeightViewModel>();
 
-            for (var i = 1; i <= binCollection.GreenBinCount.GetValueOrDefault(); i++)
-                binWeightViewModels.Add(new BinWeightViewModel
+            if (binCollection.BinWeights.Count == binCollection.GreenBinCount.GetValueOrDefault())
+            {
+                foreach (var binWeight in binCollection.BinWeights)
                 {
-                    BinNumber = i
-                });
-
+                    binWeightViewModels.Add(_binWeightMapper.Map(binWeight));
+                }
+            }
+            else
+            {
+                for (var i = 1; i <= binCollection.GreenBinCount.GetValueOrDefault(); i++)
+                    binWeightViewModels.Add(new BinWeightViewModel {});
+            }
+                
             var binWeightCollectionViewModel = new BinWeightCollectionViewModel
             {
                 BinCollectionId = binCollection.Id,
@@ -120,16 +129,24 @@ namespace HopCompost_Service.Services
                 _binCollectionRepository.Single(p => p.Id == binWeightCollectionViewModel.BinCollectionId);
 
             if (binCollection.BinWeights.Count == binCollection.GreenBinCount.GetValueOrDefault())
-                binCollection.BinWeights.Clear();
-
-            foreach (var binWeightViewModel in binWeightCollectionViewModel.BinWeights)
             {
-                var binWeight = _binWeightRepository.NewObject();
+                foreach (var binWeightViewModel in binWeightCollectionViewModel.BinWeights)
+                {
+                    _binWeightRepository.Single(p => p.Id == binWeightViewModel.Id).BinWeight1 = binWeightViewModel.Weight;
+                }
+            }
+            else
+            {
+                foreach (var binWeightViewModel in binWeightCollectionViewModel.BinWeights)
+                {
+                    var binWeight = _binWeightRepository.NewObject();
 
-                binWeight.BinCollectionId = binCollection.Id;
-                binWeight.BinWeight1 = Convert.ToInt32(binWeightViewModel.Weight);
+                    binWeight.Id = binWeightViewModel.Id;
+                    binWeight.BinCollectionId = binCollection.Id;
+                    binWeight.BinWeight1 = binWeightViewModel.Weight;
 
-                binCollection.BinWeights.Add(binWeight);
+                    binCollection.BinWeights.Add(binWeight);
+                }
             }
 
             if (binWeightCollectionViewModel.Processed)
