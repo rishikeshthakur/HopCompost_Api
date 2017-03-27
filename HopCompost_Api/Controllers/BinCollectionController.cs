@@ -47,19 +47,21 @@ namespace HopCompost_Api.Controllers
             return Json(_binService.GetBinWeightCollection(id));
         }
 
-        public IHttpActionResult Post([FromBody] BinWeightCollectionViewModel binWeightCollectionViewModel)
+        [HttpPost]
+        [Route("api/BinCollection/PostBinWeightCollection")]
+        public IHttpActionResult PostBinWeightCollection([FromBody] BinWeightCollectionViewModel binWeightCollectionViewModel)
         {
             var resultAndMessage = _binService.TryAddBinWeightCollection(binWeightCollectionViewModel);
 
             return resultAndMessage.IsSuccessful ? (IHttpActionResult)Ok() : InternalServerError();
         }
 
-        //public IHttpActionResult Post([FromBody]BinCollectionViewModel binCollectionViewModel)
-        //{
-        //    var resultAndMessage = _binService.TryAddBinCollection(binCollectionViewModel);
+        public IHttpActionResult Post([FromBody]BinCollectionViewModel binCollectionViewModel)
+        {
+            var resultAndMessage = _binService.TryAddBinCollection(binCollectionViewModel);
 
-        //    return resultAndMessage.IsSuccessful ? (IHttpActionResult)Ok() : InternalServerError();
-        //}
+            return resultAndMessage.IsSuccessful ? (IHttpActionResult)Ok() : InternalServerError();
+        }
 
         public IHttpActionResult Put(int id, [FromBody]BinCollectionViewModel binCollectionViewModel)
         {
